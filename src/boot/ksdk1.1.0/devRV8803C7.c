@@ -325,7 +325,7 @@ WarpStatus setRTCCountdownRV8803C7(uint16_t countdown, WarpRV8803ExtTD_t clk_fre
 	if (countdown > 4095) {
 		return 1;
 	}
-	
+
 	uint8_t ext, flags, ctrl, ret;
 	ret = readRTCRegisterRV8803C7(kWarpRV8803RegExt, &ext);
 	if (ret) {

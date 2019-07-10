@@ -14,9 +14,10 @@
 #include "fsl_rtc_driver.h"
 #include "fsl_spi_master_driver.h"
 
+#include "warp-config.h"
 #include "warp.h"
 
-
+#include "devRV8803C7.h"
 /*
  *	From KSDK power_manager_demo.c <<BEGIN>>>
  */
@@ -107,7 +108,6 @@ warpSetLowPowerMode(WarpPowerMode powerMode, uint32_t sleepSeconds)
 {
 	uint8_t				cmConfigMode = CLOCK_CONFIG_INDEX_FOR_RUN;
 	power_manager_error_code_t	status;
-
 
 	switch (powerMode)
 	{

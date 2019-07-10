@@ -35,11 +35,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef WARP_BUILD_ENABLE_DEVADXL362
-#define WARP_BUILD_ENABLE_DEVADXL362
-#endif
-
-
 void		initADXL362(WarpSPIDeviceState volatile *  deviceStatePointer);
 WarpStatus	readSensorRegisterADXL362(uint8_t deviceRegister, int numberOfBytes);
 WarpStatus	writeSensorRegisterADXL362(uint8_t command, uint8_t deviceRegister, uint8_t writeValue);

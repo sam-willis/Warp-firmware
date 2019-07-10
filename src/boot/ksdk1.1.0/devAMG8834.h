@@ -35,10 +35,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef WARP_BUILD_ENABLE_DEVAMG8834
-#define WARP_BUILD_ENABLE_DEVAMG8834
-#endif
-
 void		initAMG8834(const uint8_t i2cAddress, WarpI2CDeviceState volatile *  deviceStatePointer);
 WarpStatus	readSensorRegisterAMG8834(uint8_t deviceRegister, int numberOfBytes);
 WarpStatus	writeSensorRegisterAMG8834(uint8_t deviceRegister, uint8_t payload, uint16_t menuI2cPullupValue);

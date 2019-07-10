@@ -53,11 +53,8 @@
 
 #include "gpio_pins.h"
 #include "SEGGER_RTT.h"
+#include "warp-config.h"
 #include "warp.h"
-
-/*
-*	Comment out the header file to disable devices
-*/
 #include "devBMX055.h"
 #include "devADXL362.h"
 #include "devMMA8451Q.h"
@@ -1091,7 +1088,8 @@ main(void)
 	 */
 	OSA_Init();
 
-
+	/* BW_OSC_CR_ERCLKEN(OSC_BASE, 1); */
+	/* BW_OSC_CR_EREFSTEN(OSC_BASE, 1); */
 
 	/*
 	 *	Setup SEGGER RTT to output as much as fits in buffers.
@@ -1109,13 +1107,17 @@ main(void)
 	SEGGER_RTT_WriteString(0, "1...\n\r");
 	OSA_TimeDelay(200);
 
-
-
 	/*
 	 *	Configure Clock Manager to default, and set callback for Clock Manager mode transition.
 	 *
 	 *	See "Clocks and Low Power modes with KSDK and Processor Expert" document (Low_Power_KSDK_PEx.pdf)
 	 */
+	g_defaultClockConfigurations[0].oscerConfig.Enable = true;
+	g_defaultClockConfigurations[0].oscerConfig.EnableInStop = true;
+	/* g_defaultClockConfigurations[0].simConfig.er32kSrc = kClockEr32kSrcRtc; */
+	g_defaultClockConfigurations[1].oscerConfig.Enable = true;
+	g_defaultClockConfigurations[1].oscerConfig.EnableInStop = true;
+	/* g_defaultClockConfigurations[1].simConfig.er32kSrc = kClockEr32kSrcRtc; */
 	CLOCK_SYS_Init(	g_defaultClockConfigurations,
 			CLOCK_CONFIG_NUM,
 			&clockCallbackTable,
@@ -2112,8 +2114,11 @@ main(void)
 				SEGGER_RTT_WriteString(0, "\r\n\tEnabling I2C pins\n");
 				enableI2Cpins(menuI2cPullupValue);
 				SEGGER_RTT_WriteString(0, "\r\n\tSleeping for 3 seconds, then resetting\n");
+				OSA_TimeDelay(1000);
 				warpSetLowPowerMode(kWarpPowerModeVLLS0, 3 /* sleep seconds */);
 				SEGGER_RTT_WriteString(0, "\r\n\tThis should never happen...\n");
+				OSA_TimeDelay(10000);
+				break;
 			}
 #endif
 			/*
