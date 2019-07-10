@@ -2,6 +2,7 @@
  *	Comment or uncomment to enable sensors/modules for the warp board
  */
 
+#define WARP_BUILD_ENABLE_DEVBMX055
 #define WARP_BUILD_ENABLE_DEVADXL362
 #define WARP_BUILD_ENABLE_DEVMMA8451Q
 #define WARP_BUILD_ENABLE_DEVLPS25H
